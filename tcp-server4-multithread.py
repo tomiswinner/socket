@@ -1,5 +1,5 @@
 import socket
-from multiprocessing import Process
+from threading import Thread
 
 def handle_client(client, address):
     print('Connected client ip : {}'.format(address))
@@ -23,5 +23,5 @@ print('Wait tcp accepting...')
 
 while True:
     client, address = tcp_server.accept()
-    process = Process(target=handle_client, args=(client, address))
-    process.start()
+    thread = Thread(target=handle_client, args=(client, address))
+    thread.start()
